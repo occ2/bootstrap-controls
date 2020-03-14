@@ -1,0 +1,4 @@
+{templateType BootstrapControls\types\DropdownItem}
+<a {if (!empty($id))}id="{$id}"{/if} class="dropdown-item {if $active==true} active{/if}{if $disabled==true} disabled{/if}{if $ajax==true} ajax{/if}" href="{$href}" title="{$text|translate}" {if $disabled==true} tabindex="-1" aria-disabled="true"{/if}>
+    {$text|translate}
+</a>

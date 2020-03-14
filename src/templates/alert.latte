@@ -1,0 +1,36 @@
+{templateType BootstrapControls\types\Alert}
+<div
+        {if !empty($id)}id='{$id}'{/if}
+        class='alert alert-{$type} {if $dissmiss==true}alert-dismissible fade show{/if}'
+        role='alert'
+        {foreach $attributes as $key=>$value}{$key}='{$value}' {/foreach}
+>
+    <h4 class="alert-heading" n:ifcontent>
+        {$type|translate}
+        {if $dissmiss==true}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        {/if}
+    </h4>
+    <p>{$content|translate}</p>
+    {if $dissmiss==true && empty($title)}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    {/if}
+    {if !empty($footer) || !empty($links)}
+        <hr>
+    {/if}
+    <p class="mb-0" n:ifcontent>{$footer|translate}</p>
+    {foreach $links as $link}
+        <a
+            href="{$link["href"]|noescape}"
+            class="{$link['class']}"
+            title="{$link["text"]|translate}"
+            target="{$link["target"]}"
+        >
+            {$link["text"]|translate}
+        </a>
+    {/foreach}
+</div>

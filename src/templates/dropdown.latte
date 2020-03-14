@@ -1,0 +1,9 @@
+{templateType BootstrapControls\types\Dropdown}
+<div class="dropdown">
+    {control button}
+    <div class="dropdown-menu" aria-labelledby="{$id}">
+        {foreach $items as $_id=>$item}
+            {control item-$_id}
+        {/foreach}
+    </div>
+</div>

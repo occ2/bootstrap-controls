@@ -1,0 +1,8 @@
+{templateType BootstrapControls\types\BreadCrumbs}
+<nav aria-label="breadcrumb" {if !empty($id)}id="{$id}"{/if} {foreach $attributes as $key=>$value}{$key}='{$value}' {/foreach}>
+    <ol class="breadcrumb">
+        {foreach $items as $name=>$item}
+            {control item-$name}
+        {/foreach}
+    </ol>
+</nav>

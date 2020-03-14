@@ -1,2 +1,8 @@
 .idea
 vendor/
+log/
+temp/
+Dockerfile
+docker-compose.yml
+entrypoint.sh
+composer.lock
