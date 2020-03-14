@@ -32,6 +32,14 @@ class Button extends BaseControl
     }
 
     /**
+     * @return string
+     */
+    public function getClass(): string
+    {
+        return $this->class;
+    }
+
+    /**
      * @param bool $outline
      * @return $this
      */

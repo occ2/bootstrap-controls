@@ -39,10 +39,10 @@ abstract class BaseControl extends Control
     }
 
     /**
-     * @param string|null $id
+     * @param string $id
      * @return $this
      */
-    public function setId(?string $id)
+    public function setId(string $id)
     {
         $this->id = $id;
         return $this;
