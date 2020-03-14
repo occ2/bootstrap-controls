@@ -1,0 +1,24 @@
+{
+  "name": "occ2/bootstrap-controls",
+  "description": "Bootstrap components as Nette Controls",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Milan Onderka",
+      "email": "milan_onderka@occ2.cz"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "nette/application": "^3.0",
+    "nette/forms": "^3.0",
+    "latte/latte": "^2.5",
+    "nette/di": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "BootstrapControls\\": "src"
+    }
+  }
+}
