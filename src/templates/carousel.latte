@@ -1,0 +1,27 @@
+{templateType BootstrapControls\types\Carousel}
+<div id="{$id}" class="carousel slide {if $fade==true}carousel-fade {/if}" {if !empty($interval)}data-interval="{$interval}" {else}data-interval="false" {/if} {if $keyboard==true}data-keyboard="true" {else}data-keyboard="false" {/if} {if $pause==true}data-pause="hover" {else}data-pause="false" {/if} {if $ride==true}data-ride="carousel" {else} data-ride="false" {/if} {if $wrap==true}data-wrap="true" {else} data-wrap="false" {/if} {if $touch==true}data-touch="true" {else} data-touch="false" {/if}>
+    {if $hasIndicators==true}
+        <ol class="carousel-indicators">
+            {foreach $slides as $_id=>$slide}
+                <li data-target="#{$id}" data-slide-to="{$_id}" {if $slide->isActive()}class="active"{/if}></li>
+            {/foreach}
+        </ol>
+    {/if}
+    <div class="carousel-inner">
+        {foreach $slides as $_id=>$slide}
+            <div class="carousel-item {if $slide->isActive()}active{/if}" {if !empty($slide->getInterval())}data-interval="{$slide->getInterval()}"{/if}>
+                {control slide->$_id}
+            </div>
+        {/foreach}
+    </div>
+    {if $hasControls==true}
+        <a class="carousel-control-prev" href="#{$id}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">{$previousTitle|translate}</span>
+        </a>
+        <a class="carousel-control-next" href="#{$id}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">{$nextTitle|translate}</span>
+        </a>
+    {/if}
+</div>

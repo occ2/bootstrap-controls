@@ -1,0 +1,10 @@
+{templateType BootstrapControls\types\BreadcrumbItem}
+{if $active==false}
+    <li class="breadcrumb-item">
+        <a href="{$href|noescape}">{$text}</a>
+    </li>
+{else}
+    <li class="breadcrumb-item active" aria-current="page">
+        {$text}
+    </li
+{/if}

@@ -1,0 +1,14 @@
+{templateType BootstrapControls\types\CarouselSlide}
+{if empty($customTemplate)}
+    <img src="{$imageSrc|noescape}" class="d-block w-100" alt="{$imageAlt|translate}">
+    {if !empty($title) || !empty($comment)}
+        <div class="carousel-caption d-none d-md-block">
+            <h5 n:ifcontent>{$title|translate}</h5>
+            <p n:ifcontent>{$comment|translate}</p>
+        </div>
+    {/if}
+{else}
+    {snippetArea customSlide}
+        {include $customTemplate (expand) $customParams}
+    {/snippetArea}
+{/if}

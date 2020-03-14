@@ -1,0 +1,15 @@
+{templateType BootstrapControls\types\Button}
+<a
+    {if !empty($id)}id="{$id}"{/if}
+    class="{if empty($class)}btn {if $outline==true}btn-outline-{$type}{else}btn-{$type}{/if}{if empty($size)} btn-{$size}{/if}{if $block==true} btn-block{/if}{if $active==true} active{/if}{if $disabled==true} disabled{/if}{else}{$class}{/if}{if $ajax==true}ajax{/if}"
+    href="{$text|noescape}"
+    {if $disabled==true} tabindex="-1"{/if}
+    role="button"
+    {if $active==true} aria-pressed="true"{/if}
+    {if $disabled==true} aria-disabled="true"{/if}
+    {foreach $attributes as $key=>$value}{$key}'{$value}' {/foreach}
+>
+        {if !empty($beforeIcon)}<span class="{$beforeIcon}"></span>{/if}
+        {$text|translate}
+        {if !empty($afterIcon)}<span class="{$afterIcon}"></span>{/if}
+</a>
