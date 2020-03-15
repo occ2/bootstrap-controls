@@ -8,9 +8,9 @@
         </ol>
     {/if}
     <div class="carousel-inner">
-        {foreach $slides as $_id=>$slide}
+        {foreach $slides as $name=>$slide}
             <div class="carousel-item {if $slide->isActive()}active{/if}" {if !empty($slide->getInterval())}data-interval="{$slide->getInterval()}"{/if}>
-                {control slide->$_id}
+                {control $name}
             </div>
         {/foreach}
     </div>

@@ -9,7 +9,7 @@
     {if $disabled==true} aria-disabled="true"{/if}
     {foreach $attributes as $key=>$value}{$key}'{$value}' {/foreach}
 >
-        {if !empty($beforeIcon)}<span class="{$beforeIcon}"></span>{/if}
+        {foreach $beforeComponents as $beforeComponent}{(string) $beforeComponent|noescape}{/foreach}
         {$text|translate}
-        {if !empty($afterIcon)}<span class="{$afterIcon}"></span>{/if}
+        {foreach $afterComponents as $afterComponent}{$afterComponent|noescape}{/foreach}
 </a>

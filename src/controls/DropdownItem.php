@@ -15,23 +15,17 @@ class DropdownItem extends BaseControl
     protected bool $ajax = true;
     protected bool $active = false;
     protected bool $disabled = false;
-    protected Dropdown $dropdown;
-
-    /**
-     * DropdownItem constructor.
-     * @param Dropdown $dropdown
-     */
-    public function __construct(Dropdown $dropdown)
-    {
-        $this->dropdown = $dropdown;
-    }
 
     /**
      * @return Dropdown
      */
     public function endItem(): Dropdown
     {
-        return $this->dropdown;
+        /**
+         * @var $parent Dropdown
+         */
+        $parent = $this->parent;
+        return $parent;
     }
 
     /**

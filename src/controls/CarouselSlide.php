@@ -10,7 +10,6 @@ class CarouselSlide extends BaseControl
 {
     const TEMPLATE = parent::TEMPLATE . "carouselSlide.latte";
 
-    protected Carousel $carousel;
     protected string $imageSrc = "";
     protected string $imageAlt = "";
     protected ?string $title = null;
@@ -118,20 +117,15 @@ class CarouselSlide extends BaseControl
     }
 
     /**
-     * CarouselSlide constructor.
-     * @param Carousel $carousel
-     */
-    public function __construct(Carousel $carousel)
-    {
-        $this->carousel = $carousel;
-    }
-
-    /**
      * @return Carousel
      */
     public function endSlide(): Carousel
     {
-        return $this->carousel;
+        /**
+         * @var $parent Carousel
+         */
+        $parent = $this->getParent();
+        return $parent;
     }
 
     /**

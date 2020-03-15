@@ -2,7 +2,7 @@
 
 namespace BootstrapControls\controls;
 
-use Nette\Application\UI\Multiplier;
+use Nette\ComponentModel\IContainer;
 
 /**
  * Class Dropdown
@@ -12,21 +12,29 @@ class Dropdown extends BaseControl
 {
     const TEMPLATE = parent::TEMPLATE . "dropdown.latte";
 
-    /**
-     * @var Button|null
-     */
     protected ?Button $button = null;
-
-    /**
-     * @var string|null
-     */
     protected ?string $buttonText = null;
-
-    /**
-     * @var array
-     */
     protected array $items = [];
 
+    /**
+     * @param Button|null $button
+     * @return $this
+     */
+    public function setButton(?Button $button)
+    {
+        $this->button = $button;
+        return $this;
+    }
+
+    /**
+     * @param string|null $buttonText
+     * @return $this
+     */
+    public function setButtonText(?string $buttonText)
+    {
+        $this->buttonText = $buttonText;
+        return $this;
+    }
     /**
      * @return array
      */
@@ -36,22 +44,37 @@ class Dropdown extends BaseControl
     }
 
     /**
+     * @param string $name
      * @return DropdownItem
      */
-    public function addItem(): DropdownItem
+    public function addItem(string $name): DropdownItem
     {
-        $item = new DropdownItem($this);
+        $item = new DropdownItem();
         $item->setTranslator($this->translator);
         $this->items[] = $item;
+        $this->addComponent($item, $name);
         return $item;
     }
 
     /**
+     * @param string $name
      * @return $this
      */
-    public function addSeparator()
+    public function addSeparator(string $name)
     {
-        $this->items[] = new DropdownSeparator();
+        $this->items[] = $separator = new DropdownSeparator();
+        $this->addComponent($separator, $name);
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function removeItem(string $name)
+    {
+        $this->removeComponent($this->items[$name]);
+        unset($this->items[$name]);
         return $this;
     }
 
@@ -84,19 +107,6 @@ class Dropdown extends BaseControl
     }
 
     /**
-     * @param string $name
-     * @return Multiplier
-     */
-    protected function createComponentItem(string $name): Multiplier
-    {
-        $multiplier = new Multiplier(function ($id) {
-            return $this->items[$id];
-        });
-        $this->addComponent($multiplier, $name);
-        return $multiplier;
-    }
-
-    /**
      * @param bool $toString
      * @return string|null
      */
@@ -104,5 +114,13 @@ class Dropdown extends BaseControl
     {
         $this->template->items = $this->items;
         return parent::render($toString);
+    }
+
+    /**
+     * @return IContainer|null
+     */
+    public function endDropdown(): ?IContainer
+    {
+        return $this->parent;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace BootstrapControls\controls;
 
-use Nette\Application\UI\Multiplier;
 use Nette\Utils\Random;
 
 /**
@@ -137,12 +136,25 @@ class Carousel extends BaseControl
     }
 
     /**
+     * @param string $name
      * @return CarouselSlide
      */
-    public function addSlide(): CarouselSlide
+    public function addSlide(string $name): CarouselSlide
     {
-        $this->slides[] = $slide = new CarouselSlide($this);
+        $this->slides[$name] = $slide = new CarouselSlide();
+        $this->addComponent($slide, $name);
         return $slide;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function removeSlide(string $name)
+    {
+        $this->removeComponent($this->slides[$name]);
+        unset($this->slides[$name]);
+        return $this;
     }
 
     /**
@@ -151,20 +163,6 @@ class Carousel extends BaseControl
     public function getSlides(): array
     {
         return $this->slides;
-    }
-
-    /**
-     * @param string $name
-     * @return Multiplier
-     */
-    protected function createComponentSlide(string $name): Multiplier
-    {
-        $multiplier = new Multiplier(function ($id) {
-            $slide = $this->slides[(int) $id];
-            $slide->setTranslator($this->translator);
-        });
-        $this->addComponent($multiplier, $name);
-        return $multiplier;
     }
 
     /**
