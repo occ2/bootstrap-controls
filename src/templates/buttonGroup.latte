@@ -1,0 +1,6 @@
+{templateType BootstrapControls\types\ButtonGroup}
+<div class="{if $vertical==false}btn-group{else}btn-group-vertical{/if} {if !empty($size)}btn-group-{$size}{/if} {$class}" role="group" aria-label="{$label}">
+    {foreach $buttons as $name=>$button}
+        {control $name}
+    {/foreach}
+</div>

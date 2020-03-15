@@ -4,6 +4,10 @@ namespace BootstrapControls\controls;
 
 use Nette\Utils\Html;
 
+/**
+ * Class Icon
+ * @package BootstrapControls\controls
+ */
 class Icon extends BaseControl
 {
     protected string $type = "fas";

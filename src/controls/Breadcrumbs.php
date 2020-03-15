@@ -2,8 +2,6 @@
 
 namespace BootstrapControls\controls;
 
-use Nette\Application\UI\Multiplier;
-
 /**
  * Class Breadcrumbs
  * @package BootstrapControls\controls
@@ -23,42 +21,28 @@ class Breadcrumbs extends BaseControl
      */
     public function addItem(string $name): BreadcrumbItem
     {
-        $this->items[$name] = $item = new BreadcrumbItem($this);
+        $this->items[$name] = $item = new BreadcrumbItem();
+        $this->addComponent($item, $name);
         return $item;
     }
 
     /**
      * @param string $name
+     * @return $this
      */
     public function removeItem(string $name)
     {
-        if (isset($this->items[$name])) {
-            unset($this->items[$name]);
-        }
+        $this->removeComponent($this->items[$name]);
+        unset($this->items[$name]);
+        return $this;
     }
 
     /**
-     * @param string $name
-     * @return BreadcrumbItem|null
+     * @return array
      */
-    public function getItem(string $name): ?BreadcrumbItem
+    public function getItems(): array
     {
-        return isset($this->items[$name]) ? $this->items[$name] : null;
-    }
-
-    /**
-     * @param string $name
-     * @return Multiplier
-     */
-    protected function createComponentItem(string $name): Multiplier
-    {
-        $multiplier = new Multiplier(function ($name) {
-            $item = $this->items[$name];
-            $item->setTranslator($this->translator);
-            return $item;
-        });
-        $this->addComponent($multiplier, $name);
-        return $multiplier;
+        return $this->items;
     }
 
     /**

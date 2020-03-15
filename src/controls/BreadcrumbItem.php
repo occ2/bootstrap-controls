@@ -13,16 +13,6 @@ class BreadcrumbItem extends BaseControl
     protected string $text;
     protected string $href = "#";
     protected bool $active = false;
-    protected Breadcrumbs $breadcrumbs;
-
-    /**
-     * BreadCrumbItem constructor.
-     * @param Breadcrumbs $breadcrumbs
-     */
-    public function __construct(Breadcrumbs $breadcrumbs)
-    {
-        $this->breadcrumbs = $breadcrumbs;
-    }
 
     /**
      * @param string $text
@@ -71,6 +61,10 @@ class BreadcrumbItem extends BaseControl
      */
     public function endItem(): BreadCrumbs
     {
-        return $this->breadcrumbs;
+        /**
+         * @var $parent Breadcrumbs
+         */
+        $parent = $this->getParent();
+        return $parent;
     }
 }

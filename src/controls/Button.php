@@ -24,6 +24,14 @@ class Button extends BaseControl
     protected array $afterComponents = [];
 
     /**
+     * @return BaseControl|null
+     */
+    public function endButton(): ?BaseControl
+    {
+        return $this->_parent;
+    }
+
+    /**
      * @param Html $component
      * @return $this
      */
