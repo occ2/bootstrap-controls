@@ -14,6 +14,7 @@ class Badge extends BaseControl
     protected string $type = "primary";
     protected bool $pillStyle = false;
     protected string $element = "span";
+    protected ?Html $prototype = null;
 
     /**
      * @param string $text
@@ -56,10 +57,20 @@ class Badge extends BaseControl
     }
 
     /**
-     * @param bool $toString
-     * @return string|null
+     * @return Html
      */
-    public function render(bool $toString = false): ?string
+    public function getPrototype(): Html
+    {
+        if (empty($this->prototype)) {
+            $this->prototype = $this->createPrototype();
+        }
+        return $this->prototype;
+    }
+
+    /**
+     * @return Html
+     */
+    protected function createPrototype(): Html
     {
         $class = "badge";
         if ($this->pillStyle == true) {
@@ -67,11 +78,20 @@ class Badge extends BaseControl
         }
         $class .= " badge-" . $this->type;
         $this->attributes["class"] = $class;
-        $badge = Html::el($this->element)
+        return Html::el($this->element)
             ->addAttributes($this->attributes)
             ->setText(
                 !empty($this->translator) ? $this->translator->translate($this->text) : $this->text
             );
+    }
+
+    /**
+     * @param bool $toString
+     * @return string|null
+     */
+    public function render(bool $toString = false): ?string
+    {
+        $badge = $this->getPrototype();
         if ($toString == true) {
             return (string) $badge;
         } else {

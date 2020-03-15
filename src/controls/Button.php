@@ -2,6 +2,8 @@
 
 namespace BootstrapControls\controls;
 
+use Nette\Utils\Html;
+
 /**
  * Class Button
  * @package BootstrapControls\controls
@@ -18,8 +20,28 @@ class Button extends BaseControl
     protected string $text;
     protected string $href = "#";
     protected string $class = "";
-    protected ?string $beforeIcon = null;
-    protected ?string $afterIcon = null;
+    protected array $beforeComponents = [];
+    protected array $afterComponents = [];
+
+    /**
+     * @param Html $component
+     * @return $this
+     */
+    public function addBeforeComponent(Html $component)
+    {
+        $this->beforeComponents[] = $component;
+        return $this;
+    }
+
+    /**
+     * @param Html $component
+     * @return $this
+     */
+    public function addAfterComponent(Html $component)
+    {
+        $this->afterComponents[] = $component;
+        return $this;
+    }
 
     /**
      * @param bool $ajax
@@ -130,26 +152,6 @@ class Button extends BaseControl
     }
 
     /**
-     * @param string|null $beforeIcon
-     * @return $this
-     */
-    public function setBeforeIcon(?string $beforeIcon)
-    {
-        $this->beforeIcon = $beforeIcon;
-        return $this;
-    }
-
-    /**
-     * @param string|null $afterIcon
-     * @return $this
-     */
-    public function setAfterIcon(?string $afterIcon)
-    {
-        $this->afterIcon = $afterIcon;
-        return $this;
-    }
-
-    /**
      * @param bool $toString
      * @return string|null
      */
@@ -159,14 +161,14 @@ class Button extends BaseControl
         $this->template->size = $this->size;
         $this->template->block = $this->block;
         $this->template->active = $this->active;
-        $this->template->disabled = $this->dosabled;
+        $this->template->disabled = $this->disabled;
         $this->template->type = $this->type;
         $this->template->text = $this->text;
         $this->template->href = $this->href;
         $this->template->class = $this->class;
-        $this->template->beforeIcon = $this->beforeIcon;
-        $this->template->afterIcon = $this->afterIcon;
         $this->template->ajax = $this->ajax;
+        $this->template->beforeComponents = $this->beforeComponents;
+        $this->template->afterComponents = $this->afterComponents;
         return parent::render($toString);
     }
 }

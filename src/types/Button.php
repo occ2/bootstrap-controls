@@ -17,7 +17,7 @@ class Button extends BaseType
     public string $text;
     public string $href;
     public string $class;
-    public string $beforeIcon;
-    public string $afterIcon;
     public bool $ajax;
+    public array $beforeComponents;
+    public array $afterComponents;
 }
